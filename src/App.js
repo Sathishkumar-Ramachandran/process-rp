@@ -15,6 +15,9 @@ import React from "react";
   import Breadcrumbscomp from "./components/breadcrumbs";
   import Auth from "./pages/auth";
   import PrivateRoute from "./redux/privateRoute";
+import KotakRawData from "./pages/kotak/kotakRawdata";
+import Users from "./components/users";
+import KotakRawDataContainer from "./pages/kotakRawDataContainer";
 
   function App() {
     function WithNavs () {
@@ -52,6 +55,10 @@ import React from "react";
           <Route element={<WithNavs />}>
             <Route path="/" element={<Dashboard />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            
+              <Route path='/kotakbank/rawdata' element={<KotakRawDataContainer />} />
+              <Route path="/admin/users" element={<Users />} />
+
             <Route path="/request/raise/new" element={<Raiserequest />} />
             <Route path="/requests" element={<Bankrequests />} />
             <Route path="/admin" element={<Admin />} />

@@ -1,61 +1,84 @@
 /* leftnav.css */
 
 .left-nav {
-    width: 250px; /* Adjust width as needed */
-    background-color: #f5f5f5; /* Background color of the left navigation */
-    height: 100%; /* Make sure it takes full height */
-    position: fixed; /* Fixed position to keep it in place */
-    top: 0; /* Align it to the top */
-    left: 0; /* Align it to the left */
-    overflow-y: auto; /* Enable vertical scrolling if content exceeds the height */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add box-shadow for a subtle effect */
-  }
-  
-  .razorpay-icon {
-    padding: 20px; /* Add padding to the icon */
-  }
-  
-  .razorpay-icon img {
-    width: 100px; /* Set the width of the icon image */
-  }
-  
-  .leftnav-menu {
-    margin-top: 20px; /* Add margin at the top of the menu */
-  }
-  
-  .leftnav-menu-item {
-    display: flex; /* Use flexbox for layout */
-    align-items: center; /* Align items vertically */
-    padding: 10px 20px; /* Add padding to each menu item */
-    cursor: pointer; /* Change cursor to pointer on hover */
-    transition: background-color 0.3s; /* Add transition effect for smoother hover */
-    white-space: nowrap; /* Prevent text wrapping */
-    overflow: hidden; /* Hide overflowed content */
-    text-overflow: ellipsis; /* Show ellipsis for overflowed text */
-  }
-  
-  .leftnav-menu-item:hover {
-    background-color: #e0e0e0; /* Change background color on hover */
-  }
-  
-  .selected {
-    background-color: #cfe9ff; /* Light blue background color for selected item */
-  }
-  
-  .icon-wrapper {
-    margin-right: 10px; /* Add margin to separate icon from text */
-    color: #007bff; /* Blue color for icon */
-  }
-  
-  .leftnav-menu-item.selected .icon-wrapper {
-    color: #0056b3; /* Darker blue for icon of selected item */
-  }
-  
-  .leftnav-menu-item span {
-    color: #007bff; /* Blue color for text */
-  }
-  
-  .leftnav-menu-item.selected span {
-    color: #0056b3; /* Darker blue for text of selected item */
-  }
-  
+  width: 250px; /* Adjust width as needed */
+  background-color: #f5f5f5; /* Background color of the left navigation */
+  height: 100%; /* Make sure it takes full height */
+  position: fixed; /* Fixed position to keep it in place */
+  top: 0; /* Align it to the top */
+  left: 0; /* Align it to the left */
+  overflow-y: auto; /* Enable vertical scrolling if content exceeds the height */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add box-shadow for a subtle effect */
+}
+
+.razorpay-icon {
+  padding: 20px; /* Add padding to the icon */
+}
+
+.razorpay-icon img {
+  width: 100px; /* Set the width of the icon image */
+}
+
+.leftnav-menu {
+  margin-top: 20px; /* Add margin at the top of the menu */
+}
+
+.leftnav-menu-item {
+  display: flex; /* Use flexbox for layout */
+  align-items: center; /* Align items vertically */
+  padding: 10px 20px; /* Add padding to each menu item */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  transition: background-color 0.3s; /* Add transition effect for smoother hover */
+  white-space: nowrap; /* Prevent text wrapping */
+  overflow: hidden; /* Hide overflowed content */
+  text-overflow: ellipsis; /* Show ellipsis for overflowed text */
+}
+
+.leftnav-menu-item:hover {
+  background-color: #e0e0e0; /* Change background color on hover */
+}
+
+.selected {
+  background-color: #cfe9ff; /* Light blue background color for selected item */
+}
+
+.icon-wrapper {
+  margin-right: 10px; /* Add margin to separate icon from text */
+  color: #007bff; /* Blue color for icon */
+}
+
+.leftnav-menu-item.selected .icon-wrapper {
+  color: #0056b3; /* Darker blue for icon of selected item */
+}
+
+.leftnav-menu-item span {
+  color: #007bff; /* Blue color for text */
+}
+
+.leftnav-menu-item.selected span {
+  color: #0056b3; /* Darker blue for text of selected item */
+}
+.subcomponents {
+  margin-left: 30px; /* Adjust margin to create indentation for subcomponents */
+}
+
+.subcomponent {
+  display: flex; /* Use flexbox for layout */
+  align-items: center; /* Align items vertically */
+  padding: 8px 20px; /* Add padding to each subcomponent */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  transition: background-color 0.3s; /* Add transition effect for smoother hover */
+}
+
+.subcomponent:hover {
+  background-color: #e0e0e0; /* Change background color on hover */
+}
+
+.subcomponent .icon-wrapper {
+  margin-right: 10px; /* Add margin to separate icon from text */
+  color: #007bff; /* Blue color for icon */
+}
+
+.subcomponent span {
+  color: #007bff; /* Blue color for text */
+}

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import { useNavigate } from 'react-router-dom';
 import '../styles/leftnav.css';
 import Icon from "../assets/razorpay-icon.png";
@@ -7,6 +6,8 @@ import Icon from "../assets/razorpay-icon.png";
 import GridViewIcon from '@mui/icons-material/GridView';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import StorefrontIcon from '@mui/icons-material/Storefront';
+import TableChartIcon from '@mui/icons-material/TableChart';
+import RequestPageIcon from '@mui/icons-material/RequestPage';
 
 export const LeftNavList = [
     {
@@ -18,60 +19,84 @@ export const LeftNavList = [
     },
     {
         id: 2,
-        compName: "Raise Request",
-        componentIcon: <AccountBalanceIcon />,
+        compName: "Raw Data",
+        componentIcon: <TableChartIcon />,
         path: '/request/raise/new',
         role: 'admin'
     },
     {
         id: 3,
-        compName: "Bank Requests",
+        compName: "Axis Bank",
         componentIcon: <AccountBalanceIcon />,
-        path: '/requests',
-        role: 'admin'
+        path: '/axisbank/requests',
+        role: 'admin',
+        subcomponents: [{
+            compName: "Raw Data",
+            componentIcon: <TableChartIcon />,
+            path: '/axisbank/rawdata'
+        },
+        {
+            compName: "Bank Requests",
+            componentIcon: <RequestPageIcon />,
+            path: '/axisbank/requests'
+        }]
+    
     },
     {
         id: 4,
+        compName: "Kotak Bank",
+        componentIcon: <AccountBalanceIcon />,
+        path: '/requests/kotakbank',
+        role: 'admin',
+        subcomponents: [{
+            compName: "Raw Data",
+            componentIcon: <TableChartIcon />,
+            path: '/kotakbank/rawdata'
+        },
+        {
+            compName: "Bank Requests",
+            componentIcon: <RequestPageIcon />,
+            path: '/kotakbank/requests'
+        }]
+    
+    },
+    {
+        id: 5,
         compName: "Merchant List",
         componentIcon: <StorefrontIcon />,
         path: '/merchants',
         role: 'admin'
     },
     {
-        id: 5,
+        id: 6,
         compName: "Admin",
         componentIcon: <AccountBalanceIcon />,
         path: '/admin',
         role: 'admin'
     },
-
-    
-
-]
-
-
+];
 
 const LeftNav = () => {
-    const [selectedItem, setSelectedItem] = useState(1);
-
+    const [selectedItem, setSelectedItem] = useState(null);
     const navigate = useNavigate();
 
     const handleItemClick = (item) => {
-        setSelectedItem(item.id);
-        navigate(item.path);
+        setSelectedItem(selectedItem === item.id ? null : item.id);
+        if (!item.subcomponents) {
+            navigate(item.path);
+        }
     };
 
-    return(
+    return (
         <div className="left-nav">
             <div className="razorpay-icon">
                 <img src={Icon} alt="Razorpay-Icon" />
             </div>
             <div className="leftnav-menu">
-                {
-                    LeftNavList.map((item) => (
+                {LeftNavList.map((item) => (
+                    <div key={item.id}>
                         <div
-                            key={item.id}
-                            className={selectedItem === item.id ? "leftnav-menu-item selected" : "leftnav-menu-item"}
+                            className={(selectedItem === item.id) ? "leftnav-menu-item selected" : "leftnav-menu-item"}
                             onClick={() => handleItemClick(item)}
                         >
                             <div className="icon-wrapper">
@@ -79,11 +104,27 @@ const LeftNav = () => {
                             </div>
                             <span>{item.compName}</span>
                         </div>
-                    ))
-                }
+                        {item.subcomponents && selectedItem === item.id && (
+                            <div className="subcomponents">
+                                {item.subcomponents.map((subcomp, index) => (
+                                    <div
+                                        key={index}
+                                        className="subcomponent"
+                                        onClick={() => navigate(subcomp.path)}
+                                    >
+                                        <div className="icon-wrapper">
+                                            {subcomp.componentIcon}
+                                        </div>
+                                        <span>{subcomp.compName}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                ))}
             </div>
         </div>
-    )
+    );
 };
 
 export default LeftNav;

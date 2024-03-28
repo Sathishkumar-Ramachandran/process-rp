@@ -1,0 +1,45 @@
+
+.kotak-raw-data-container {
+    /* width: 60%; */
+    width: fit-content;
+    overflow-x: auto;  /* Horizontal scrolling */
+    overflow-y: auto;  /* Hide vertical scrollbar (optional) */
+    margin-top: 20px;
+    /* height: 600px;  (Optional, adjust height as needed) */
+  }
+  
+  .kotak-raw-data {
+    width: fit-content; /* Adjusts width based on content */
+  }
+  
+  .content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  
+  .table-container {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow-x: auto;  /* Horizontal scrolling */
+    width: fit-content;
+    /* background-image: linear-gradient(to bottom, #4d94ff, #0066cc);  */
+    color: white; /* Text color */
+  }
+  
+  .custom-table-container {
+    max-height: 700px; /* Adjust height as needed */
+  }
+  
+  .table-header {
+    background-image: linear-gradient(to bottom, #4d94ff, #0066cc); /* Blue gradient */
+    color: white; /* Text color */
+  }
+  
+  .calendar-option {
+    position: fixed;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 150px; /* Adjust width as needed */
+  }
+  
