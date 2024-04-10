@@ -41,9 +41,9 @@ const Users = () => {
   return (
     <div>
       <h2>User List</h2>
-      <TableContainer component={Paper} style={{ maxWidth: '600px', margin: 15,background: 'linear-gradient(135deg, #007bff, #0056b3)' }}>
+      <TableContainer component={Paper} style={{ maxWidth: '600px', margin: 15 }}>
         <Table size="small">
-          <TableHead>
+          <TableHead style={{background: 'linear-gradient(135deg, #007bff, #0056b3)'}}>
             <TableRow>
               <TableCell>Name</TableCell>
               <TableCell>Email</TableCell>

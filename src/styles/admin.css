@@ -1,14 +1,14 @@
 .admin-option {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    margin-bottom: 16px;
-    padding: 8px;
-    border-radius: 8px;
-    background-color: #007bff; /* Blue color */
-    color: #fff; /* White color */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  padding: 8px;
+  border-radius: 8px;
+  background-color: #007bff; /* Blue color */
+  color: #fff; /* White color */
 }
 
 .admin-option:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+  background-color: #0056b3; /* Darker blue on hover */
 }

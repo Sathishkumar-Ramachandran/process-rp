@@ -1,15 +1,16 @@
 import React from "react";
-import KotakRawData from "./kotak/kotakRawdata";
+
 import "../styles/kotakrawcontainer.css";
 import Grid from '@mui/material/Grid';
+import AxisRawData from "./axis/axisRawData";
 
-const KotakRawDataContainer = () => {
+const AxisRawDataContainer = () => {
   return (
     <div>
       <Grid container sx={{background:'white'}}>
         <Grid item sm={12}>
           
-          <KotakRawData />
+          <AxisRawData />
         </Grid>
       </Grid>
       
@@ -17,4 +18,4 @@ const KotakRawDataContainer = () => {
   );
 };
 
-export default KotakRawDataContainer;
+export default AxisRawDataContainer;

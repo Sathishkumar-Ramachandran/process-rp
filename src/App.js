@@ -6,7 +6,7 @@ import React from "react";
   import TopNav from "./components/topNav";
   import LeftNav from "./components/leftNav";
   import Dashboard from "./pages/dashboard";
-  import Raiserequest from "./pages/raiseRequestPage";
+  import Raiserequest from "./pages/rawData";
   import NotFound from "./pages/pageNotFound";
   import Bankrequests from "./pages/bankRequests";
   import Admin from "./pages/admin";
@@ -16,17 +16,25 @@ import React from "react";
   import Auth from "./pages/auth";
   import PrivateRoute from "./redux/privateRoute";
 import KotakRawData from "./pages/kotak/kotakRawdata";
+import Container from '@mui/material/Container';
+import Stack from '@mui/material/Stack';
 import Users from "./components/users";
+import Grid from '@mui/material/Grid';
 import KotakRawDataContainer from "./pages/kotakRawDataContainer";
+import { Padding } from "@mui/icons-material";
+import AxisRawDataContainer from "./pages/axisRawDataContainer";
+import RawData from "./pages/rawData";
+import KotakRequestDataContainer from "./RequestDetailsContainer";
+import AxisRequestDataContainer from "./AxisRequestDetailsContainer";
 
   function App() {
     function WithNavs () {
       return(
         <>
-          <div
+          {/* <div
             style={{
               display: "grid",
-              gridTemplateRows: "auto 1fr", // Change gridTemplateRows instead of gridTemplateColumns
+              gridTemplateRows: "auto 1fr",
               height: "100vh"
             }}
           >
@@ -38,11 +46,31 @@ import KotakRawDataContainer from "./pages/kotakRawDataContainer";
                 <LeftNav />
               </div>
               <div style={{ flex: 1, marginLeft: "250px", marginTop: "60px"}}>
-                {/* <Breadcrumbscomp /> */}
+               
                 <Outlet />
               </div>
             </div>
-          </div>
+          </div> */}
+
+
+          
+              <Grid container sx={{minHeight:"100vh"}}>
+                <Grid item sm={2} sx={{background:"black",width:'100%'}}>
+                  <LeftNav />
+                </Grid>
+                <Grid item sm={10}>
+                  <Stack>
+                    <TopNav />
+                  </Stack>
+                  <Stack sx={{overflow:"auto",margin:"1%",borderRadius: 3,border:'5px solid #f5f5f5'}}>
+                  
+                    <Outlet />
+                  </Stack>
+                </Grid>
+                
+              </Grid>
+          
+
         </>
       )
     }
@@ -55,11 +83,15 @@ import KotakRawDataContainer from "./pages/kotakRawDataContainer";
           <Route element={<WithNavs />}>
             <Route path="/" element={<Dashboard />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            
-              <Route path='/kotakbank/rawdata' element={<KotakRawDataContainer />} />
+
+              <Route path='/rawdata/kotakbank' element={<KotakRawDataContainer />} />
+              <Route path="/requests/kotakbank/" element={<KotakRequestDataContainer />} />
               <Route path="/admin/users" element={<Users />} />
 
-            <Route path="/request/raise/new" element={<Raiserequest />} />
+            <Route path="/rawdata" element={<RawData />} />
+            <Route path="/rawdata/axisbank" element={<AxisRawDataContainer />} />
+            <Route path="/requests/axisbank" element={<AxisRequestDataContainer />}  />
+            
             <Route path="/requests" element={<Bankrequests />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/merchants" element={<Merchants />} />

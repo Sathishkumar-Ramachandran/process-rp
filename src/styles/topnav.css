@@ -1,11 +1,6 @@
 .top-nav {
-    background-color: #f5f5f5; /* Background color of the top navigation bar */
-    margin-left: 250px;
-    width: 100vw;
-    height: 60px; /* Adjust height as needed */
-    display: fixed; /* Use flexbox for layout */
-    justify-content: space-between; /* Align items with space between */
-    align-items: center; /* Align items vertically */
-    padding: 0 20px; /* Add padding to the top navigation */
-  }
+  background-color: #f5f5f5;
+  /* border: 1px solid; */
+  /* background-color: black; */
+}
 

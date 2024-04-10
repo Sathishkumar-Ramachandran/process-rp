@@ -1,10 +1,10 @@
 /* leftnav.css */
 
 .left-nav {
-  width: 250px; /* Adjust width as needed */
+  /* border: 1px solid; */
   background-color: #f5f5f5; /* Background color of the left navigation */
   height: 100%; /* Make sure it takes full height */
-  position: fixed; /* Fixed position to keep it in place */
+  /* position: fixed; Fixed position to keep it in place */
   top: 0; /* Align it to the top */
   left: 0; /* Align it to the left */
   overflow-y: auto; /* Enable vertical scrolling if content exceeds the height */

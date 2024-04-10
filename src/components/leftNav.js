@@ -21,7 +21,7 @@ export const LeftNavList = [
         id: 2,
         compName: "Raw Data",
         componentIcon: <TableChartIcon />,
-        path: '/request/raise/new',
+        path: '/rawdata',
         role: 'admin'
     },
     {
@@ -33,12 +33,12 @@ export const LeftNavList = [
         subcomponents: [{
             compName: "Raw Data",
             componentIcon: <TableChartIcon />,
-            path: '/axisbank/rawdata'
+            path: '/rawdata/axisbank'
         },
         {
             compName: "Bank Requests",
             componentIcon: <RequestPageIcon />,
-            path: '/axisbank/requests'
+            path: '/requests/axisbank'
         }]
     
     },
@@ -51,12 +51,12 @@ export const LeftNavList = [
         subcomponents: [{
             compName: "Raw Data",
             componentIcon: <TableChartIcon />,
-            path: '/kotakbank/rawdata'
+            path: '/rawdata/kotakbank'
         },
         {
             compName: "Bank Requests",
             componentIcon: <RequestPageIcon />,
-            path: '/kotakbank/requests'
+            path: '/requests/kotakbank/'
         }]
     
     },

@@ -12,22 +12,22 @@ import {
   Button,
 } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
-
 import "../../styles/kotakRawData.css";
 
-const KotakRawData = () => {
+const AxisRawData = () => {
   const todayDate = new Date().toISOString().slice(0, 10);
   const [date, setDate] = useState("");
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedRows, setSelectedRows] = useState([]);
+  const [selectAll, setSelectAll] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/rawdata/kotakbank?date=${date}`
+          `http://localhost:5000/rawdata/axisbank?date=${date}`
         );
         const jsonData = await response.json();
         console.log(jsonData);
@@ -102,13 +102,60 @@ const KotakRawData = () => {
     }
 
     setSelectedRows(newSelected);
-    console.log(selectedIndex)
+  };
+
+  const handleSelectAll = () => {
+    if (selectAll) {
+      setSelectedRows([]);
+    } else {
+      const allRows = filteredData.flatMap(item => item.data);
+      setSelectedRows(allRows);
+    }
+    setSelectAll(!selectAll);
+  };
+
+  const handleSendMail = () => {
+    const selectedRowsJSON = JSON.stringify(selectedRows);
+    console.log(selectedRowsJSON);
+
+    fetch('http://localhost:5000/sendmail', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: selectedRowsJSON,
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Mail sent successfully:', data);
+      fetch('http://localhost:5000/data/axis/upload', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: selectedRowsJSON,
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Mail sent successfully:', data);
+      setSelectedRows([]);
+      
+    })
+    .catch(error => {
+      console.error('Error sending mail:', error);
+    });
+      setSelectedRows([]);
+      
+    })
+    .catch(error => {
+      console.error('Error sending mail:', error);
+    });
   };
 
   return (
     <div>
       <Stack spacing={2} sx={{ padding: "2%" }}>
-        <div> 
+        <div>
           <TextField
             className="calendar-option"
             label="Select Date"
@@ -119,6 +166,7 @@ const KotakRawData = () => {
           <Button
             variant="contained"
             style={{ alignItems: "end", padding: 5, marginLeft: "70%" }}
+            onClick={handleSendMail}
           >
             Send Mail to Bank
           </Button>
@@ -147,7 +195,10 @@ const KotakRawData = () => {
                 <TableHead>
                   <TableRow className="table-header">
                     <TableCell padding="checkbox">
-                      <Checkbox />
+                      <Checkbox
+                        checked={selectAll}
+                        onChange={handleSelectAll}
+                      />
                     </TableCell>
                     <TableCell>Status</TableCell>
                     <TableCell>Slot Number</TableCell>
@@ -193,4 +244,4 @@ const KotakRawData = () => {
   );
 };
 
-export default KotakRawData;
+export default AxisRawData;

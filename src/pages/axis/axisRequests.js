@@ -15,9 +15,9 @@ import Checkbox from "@mui/material/Checkbox";
 
 import "../../styles/kotakRawData.css";
 
-const KotakRawData = () => {
+const AxisRequestData = () => {
   const todayDate = new Date().toISOString().slice(0, 10);
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState(todayDate);
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -27,7 +27,7 @@ const KotakRawData = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/rawdata/kotakbank?date=${date}`
+          `http://localhost:5000/requests/kotakbank?date=${date}`
         );
         const jsonData = await response.json();
         console.log(jsonData);
@@ -193,4 +193,4 @@ const KotakRawData = () => {
   );
 };
 
-export default KotakRawData;
+export default AxisRequestData;

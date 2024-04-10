@@ -13,11 +13,11 @@ import {
 } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 
-import "../../styles/kotakRawData.css";
+import "../styles/kotakRawData.css";
 
-const KotakRawData = () => {
+const RawData = () => {
   const todayDate = new Date().toISOString().slice(0, 10);
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState();
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -27,16 +27,17 @@ const KotakRawData = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/rawdata/kotakbank?date=${date}`
+          `http://localhost:5000/rawdata?date=${date}`
         );
         const jsonData = await response.json();
         console.log(jsonData);
         if (
-          jsonData.rawdata &&
-          jsonData.rawdata.length > 0
+          jsonData.result &&
+          jsonData.result.rawDate &&
+          jsonData.result.rawDate.length > 0
         ) {
-          setData(jsonData.rawdata);
-          setFilteredData(jsonData.rawdata);
+          setData(jsonData.result.rawDate);
+          setFilteredData(jsonData.result.rawDate);
         } else {
           setData([]);
           setFilteredData([]);
@@ -57,29 +58,26 @@ const KotakRawData = () => {
   };
 
   const getTableHeaders = () => {
-    if (data.length > 0 && data[0].data && data[0].data[0]) {
-      return Object.keys(data[0].data[0]);
+    if (data.length > 0 && data[0]) {
+      return Object.keys(data[0]);
     } else {
       return [];
     }
   };
 
   const handleFilterChange = (filterValue) => {
-    const filtered = data.filter((item) => {
-      const innerFiltered = item.data.filter((row) => {
-        for (let key in row) {
-          if (
-            row[key]
-              .toString()
-              .toLowerCase()
-              .includes(filterValue.toLowerCase())
-          ) {
-            return true;
-          }
+    const filtered = data.filter((row) => {
+      for (let key in row) {
+        if (
+          row[key]
+            .toString()
+            .toLowerCase()
+            .includes(filterValue.toLowerCase())
+        ) {
+          return true;
         }
-        return false;
-      });
-      return innerFiltered.length > 0;
+      }
+      return false;
     });
     setFilteredData(filtered);
   };
@@ -108,7 +106,7 @@ const KotakRawData = () => {
   return (
     <div>
       <Stack spacing={2} sx={{ padding: "2%" }}>
-        <div> 
+        <div>
           <TextField
             className="calendar-option"
             label="Select Date"
@@ -116,12 +114,7 @@ const KotakRawData = () => {
             value={date}
             onChange={(event) => handleDateChange(event.target.value)}
           />
-          <Button
-            variant="contained"
-            style={{ alignItems: "end", padding: 5, marginLeft: "70%" }}
-          >
-            Send Mail to Bank
-          </Button>
+         
         </div>
         <div>
           <TextField
@@ -149,39 +142,24 @@ const KotakRawData = () => {
                     <TableCell padding="checkbox">
                       <Checkbox />
                     </TableCell>
-                    <TableCell>Status</TableCell>
-                    <TableCell>Slot Number</TableCell>
-                    {/* Dynamic table headers */}
                     {getTableHeaders().map((header) => (
                       <TableCell key={header}>{header}</TableCell>
                     ))}
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {/* Map through filtered data */}
-                  {filteredData.map((item, index) => (
-                    <React.Fragment key={index}>
-                      {/* Map through the 'data' array in each item */}
-                      {item.data.map((row, rowIndex) => (
-                        <TableRow key={`${index}-${rowIndex}`}>
-                          {/* Checkbox */}
-                          <TableCell padding="checkbox">
-                            <Checkbox
-                              checked={selectedRows.indexOf(row) !== -1}
-                              onChange={() => handleRowSelect(row)}
-                            />
-                          </TableCell>
-                          {/* Status */}
-                          <TableCell>{item.status}</TableCell>
-                          {/* Slot Number */}
-                          <TableCell>{item.slot_number}</TableCell>
-                          {/* Dynamic cell values */}
-                          {getTableHeaders().map((header) => (
-                            <TableCell key={header}>{row[header]}</TableCell>
-                          ))}
-                        </TableRow>
+                  {filteredData.map((row, index) => (
+                    <TableRow key={index}>
+                      <TableCell padding="checkbox">
+                        <Checkbox
+                          checked={selectedRows.indexOf(row) !== -1}
+                          onChange={() => handleRowSelect(row)}
+                        />
+                      </TableCell>
+                      {getTableHeaders().map((header) => (
+                        <TableCell key={header}>{row[header]}</TableCell>
                       ))}
-                    </React.Fragment>
+                    </TableRow>
                   ))}
                 </TableBody>
               </>
@@ -193,4 +171,4 @@ const KotakRawData = () => {
   );
 };
 
-export default KotakRawData;
+export default RawData;
