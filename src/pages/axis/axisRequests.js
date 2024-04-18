@@ -72,17 +72,17 @@ const AxisRequestData = () => {
     }
   
     // Check if the row is already selected
-    const isSelected = selectedRows.some((selectedRow) => selectedRow === row);
+    const selectedIndex = selectedRows.findIndex((selectedRow) => selectedRow.id === row.id);
   
     // Create a new array to hold the updated selectedRows
     let newSelected = [];
   
-    if (!isSelected) {
+    if (selectedIndex === -1) {
       // If the row is not selected, add it to selectedRows
       newSelected = [...selectedRows, row];
     } else {
       // If the row is already selected, remove it from selectedRows
-      newSelected = selectedRows.filter((selectedRow) => selectedRow !== row);
+      newSelected = [...selectedRows.slice(0, selectedIndex), ...selectedRows.slice(selectedIndex + 1)];
     }
   
     // Update selectedRows state with the newSelected array
@@ -91,6 +91,7 @@ const AxisRequestData = () => {
     // Log the updated selectedRows
     console.log(newSelected);
   };
+  
   
   
   
@@ -140,8 +141,8 @@ const AxisRequestData = () => {
       // Prepare selected rows data
       const formData = new FormData();
       formData.append("file", selectedFile);
-      formData.append("selectedRows", JSON.stringify(selectedRows.map(row => ({ ...row }))));
-  
+      formData.append("selectedRows", JSON.stringify(selectedRows));
+      console.log(formData)
       // Send both file and selected rows data to the server
       const response = await fetch("http://localhost:5000/sendmail", {
         method: "POST",
@@ -180,6 +181,7 @@ const AxisRequestData = () => {
   
 
   const sendMailWithoutAttachment = () => {
+    
     const selectedRowsData = selectedRows.map(row => {
       // Adjust this according to your data structure
       return {
@@ -192,7 +194,7 @@ const AxisRequestData = () => {
       console.error("No data selected to send.");
       return;
     }
-  
+    
     const selectedRowsJSON = JSON.stringify(selectedRowsData);
     console.log(selectedRowsJSON)
     // const selectedRowsData = selectedRows.map(row => row.data);
@@ -215,19 +217,21 @@ const AxisRequestData = () => {
       .catch(error => {
         console.error('Error sending mail:', error);
       });
-
+      console.log(selectedRowsJSON)
+      const formData = new FormData();
+      
+      formData.append("selectedRows", JSON.stringify(selectedRows));
     fetch('http://localhost:5000/sendmail', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: selectedRowsJSON,
+      
+      body: formData,
     })
+      
       .then(response => response.json())
       .then(data => {
         console.log('Mail sent successfully:', data);
         setSuccessMail(true);
-        //setSelectedRows([]);
+        
       })
       .catch(error => {
         console.error('Error sending mail:', error);
