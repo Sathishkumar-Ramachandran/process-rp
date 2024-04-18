@@ -147,6 +147,30 @@ const AxisRawData = () => {
     }
   };
 
+  const handleSendMail = () => {
+    const selectedRowsData = selectedRows.map(row => row.data); // Extracting only the 'data' part of each selected row
+    const selectedRowsJSON = JSON.stringify(selectedRowsData);
+    console.log(selectedRowsJSON);
+  
+    // Send the selected rows data to the backend
+    fetch('http://localhost:5000/sendmail', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: selectedRowsJSON,
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Mail sent successfully:', data);
+        // Assuming you want to clear selected rows after sending mail
+        setSelectedRows([]);
+      })
+      .catch(error => {
+        console.error('Error sending mail:', error);
+      });
+  };
+  
   return (
     <div>
       <Stack spacing={2} sx={{ padding: "2%" }}>
@@ -166,20 +190,20 @@ const AxisRawData = () => {
         onChange={(event) => handleFilterChange(event.target.value)}
       />
         <Button variant="contained" onClick={handleUpdate}>Update</Button>
-        <Button variant="contained">Send Mail</Button>
+        <Button variant="contained" onClick={handleSendMail}>Send Mail</Button>
       </Stack>
       <Stack>
         <TableContainer component={Paper} sx={{ maxHeight: "67vh", minHeight: "67vh" }}>
-          <Table>
+          <Table >
             <TableHead>
               <TableRow>
                 <TableCell padding="checkbox">
                   <Checkbox checked={selectAll} onChange={handleSelectAll} />
                 </TableCell>
-                <TableCell>Slot Number</TableCell>
-                <TableCell>Status</TableCell>
+                <TableCell style={{ width: "100px" }}>Slot Number</TableCell>
+                <TableCell style={{ width: "100px" }}>Status</TableCell>
                 {getTableHeaders().map((header, index) => (
-                  <TableCell key={index}>{header}</TableCell>
+                  <TableCell key={index} sx={{ minWidth: 100, whiteSpace: 'nowrap' }}>{header}</TableCell>
                 ))}
               </TableRow>
             </TableHead>
@@ -210,7 +234,9 @@ const AxisRawData = () => {
                   {getTableHeaders().map((header, headerIndex) => (
                     <TableCell key={headerIndex}>
                       <TextField
+                        
                         value={item.data[header] || ''}
+                        
                         onChange={(event) => handleCellChange(event, index, header)}
                       />
                     </TableCell>

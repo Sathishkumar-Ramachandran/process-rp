@@ -109,7 +109,7 @@ const RawData = () => {
         <div>
           <TextField
             className="calendar-option"
-            label="Select Date"
+            
             type="date"
             value={date}
             onChange={(event) => handleDateChange(event.target.value)}

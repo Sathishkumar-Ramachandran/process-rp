@@ -36,7 +36,7 @@ export const LeftNavList = [
             path: '/rawdata/axisbank'
         },
         {
-            compName: "Bank Requests",
+            compName: "Trasformed Data",
             componentIcon: <RequestPageIcon />,
             path: '/requests/axisbank'
         }]
@@ -54,19 +54,19 @@ export const LeftNavList = [
             path: '/rawdata/kotakbank'
         },
         {
-            compName: "Bank Requests",
+            compName: "Transformed Data",
             componentIcon: <RequestPageIcon />,
             path: '/requests/kotakbank/'
         }]
     
     },
-    {
-        id: 5,
-        compName: "Merchant List",
-        componentIcon: <StorefrontIcon />,
-        path: '/merchants',
-        role: 'admin'
-    },
+    // {
+    //     id: 5,
+    //     compName: "Merchant List",
+    //     componentIcon: <StorefrontIcon />,
+    //     path: '/merchants',
+    //     role: 'admin'
+    // },
     {
         id: 6,
         compName: "Admin",
